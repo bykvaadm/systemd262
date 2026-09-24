@@ -56,17 +56,3 @@ NO_BUILD=1 ./scenarios/run.sh  # на уже собранном образе
 `systemd-run --wait/--pty` требуют dbus-daemon, которого в образе нет.
 Без этих флагов `systemd-run` говорит с PID 1 напрямую через
 `/run/systemd/private`.
-
-## CI
-
-`.github/workflows/docker.yml` собирает amd64 и arm64 на нативных раннерах,
-прогоняет сценарии и публикует мультиплатформенный образ в Docker Hub.
-Нужны секреты репозитория:
-
-- `DOCKERHUB_USERNAME` — логин Docker Hub;
-- `DOCKERHUB_TOKEN` — access token Docker Hub со scope Read, Write, Delete
-  (Delete нужен, чтобы обновлять Overview на Hub из этого README).
-
-Пока секретов нет, CI только собирает и тестирует.
-На push в `main` CI заодно обновляет Overview репозитория на Docker Hub. Теги: `262`, `latest`,
-`sha-<short>`, а на git-тегах `vX.Y.Z` — ещё и версия.
