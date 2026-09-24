@@ -1,5 +1,7 @@
 # systemd262 — статический PID 1 в Docker
 
+Исходники: https://github.com/bykvaadm/systemd262
+
 Ubuntu 24.04, в которой PID 1 — полностью статический `systemd` 262.
 Собран по рецепту из NEWS v262:
 
