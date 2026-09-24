@@ -61,10 +61,10 @@ NO_BUILD=1 ./scenarios/run.sh  # на уже собранном образе
 
 `.github/workflows/docker.yml` собирает amd64 и arm64 на нативных раннерах,
 прогоняет сценарии и публикует мультиплатформенный образ в Docker Hub.
-Нужны:
+Нужны секреты репозитория:
 
-- переменная репозитория `DOCKERHUB_USERNAME`;
-- секрет `DOCKERHUB_TOKEN` (access token Docker Hub с правом Read & Write).
+- `DOCKERHUB_USERNAME` — логин Docker Hub;
+- `DOCKERHUB_TOKEN` — access token Docker Hub с правом Read & Write.
 
-Пока переменной нет, CI только собирает и тестирует. Теги: `262`, `latest`,
+Пока секретов нет, CI только собирает и тестирует. Теги: `262`, `latest`,
 `sha-<short>`, а на git-тегах `vX.Y.Z` — ещё и версия.
