@@ -33,14 +33,13 @@ ARG SYSTEMD_TAG=v262
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ca-certificates git gcc pkg-config \
+        gcc pkg-config \
         meson ninja-build gperf python3-jinja2 \
         libcap-dev libblkid-dev libmount-dev libselinux1-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build
-RUN git clone --depth 1 --branch "${SYSTEMD_TAG}" \
-        https://github.com/systemd/systemd.git src
+ADD https://github.com/systemd/systemd.git#${SYSTEMD_TAG} src
 
 RUN cd src && meson setup build \
         --default-library=static --prefer-static \
