@@ -1,0 +1,7 @@
+[Unit]
+Description=Demo: tick every 2s
+
+[Timer]
+OnActiveSec=1s
+OnUnitActiveSec=2s
+AccuracySec=100ms

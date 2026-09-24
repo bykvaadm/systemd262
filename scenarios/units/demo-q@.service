@@ -1,0 +1,7 @@
+[Unit]
+Description=Demo: queued job %i
+
+[Service]
+Type=oneshot
+Slice=demo-limited.slice
+ExecStart=/bin/sh -c 'echo "%i $(date +%%s.%%N)" >> /run/demo-q; sleep 2'

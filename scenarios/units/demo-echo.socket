@@ -1,0 +1,7 @@
+# Сокет-активация в стиле inetd: на каждое соединение отдельный экземпляр.
+[Unit]
+Description=Demo: echo socket
+
+[Socket]
+ListenStream=127.0.0.1:7777
+Accept=yes

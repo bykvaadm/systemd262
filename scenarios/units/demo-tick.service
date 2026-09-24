@@ -1,0 +1,6 @@
+[Unit]
+Description=Demo: tick
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'date +%%s >> /run/demo-ticks'

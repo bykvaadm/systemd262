@@ -1,0 +1,10 @@
+# Падающий сервис: проверка Restart= и нового в v262 RestartRandomizedDelaySec=.
+[Unit]
+Description=Demo: crash and restart
+StartLimitIntervalSec=0
+
+[Service]
+ExecStart=/bin/sh -c 'echo "demo-crash: dying"; exit 1'
+Restart=on-failure
+RestartSec=500ms
+RestartRandomizedDelaySec=500ms

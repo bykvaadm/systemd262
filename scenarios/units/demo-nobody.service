@@ -1,0 +1,8 @@
+# User= без NSS: статический PID 1 ищет пользователя прямо в /etc/passwd.
+[Unit]
+Description=Demo: run as nobody
+
+[Service]
+Type=oneshot
+User=nobody
+ExecStart=/bin/sh -c 'id -un > /tmp/demo-nobody.out'

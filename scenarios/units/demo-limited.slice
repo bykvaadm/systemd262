@@ -1,0 +1,7 @@
+# Новое в v262: в activating может быть не больше одного юнита слайса,
+# остальные ждут в очереди.
+[Unit]
+Description=Demo: one activation at a time
+
+[Slice]
+ActivatingConcurrencyMax=1

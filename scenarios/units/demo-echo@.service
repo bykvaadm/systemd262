@@ -1,0 +1,7 @@
+[Unit]
+Description=Demo: echo connection
+
+[Service]
+StandardInput=socket
+StandardOutput=socket
+ExecStart=/bin/sh -c 'read line; echo "echo: $line"'

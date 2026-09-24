@@ -1,0 +1,9 @@
+# Песочница на mount-namespace. Изоляция /tmp проверяется маркером:
+# если файл виден снаружи, PrivateTmp= на деле не сработал.
+[Unit]
+Description=Demo: PrivateTmp sandbox
+
+[Service]
+Type=oneshot
+PrivateTmp=yes
+ExecStart=/bin/sh -c 'echo inside > /tmp/demo-private'
