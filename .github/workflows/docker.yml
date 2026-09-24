@@ -17,7 +17,7 @@ concurrency:
 env:
   # Имя образа: <DOCKERHUB_USERNAME>/systemd262. Логин — переменная
   # репозитория (vars), токен — секрет (secrets.DOCKERHUB_TOKEN).
-  IMAGE: docker.io/${{ vars.DOCKERHUB_USERNAME }}/systemd262
+  HUB_IMAGE: docker.io/${{ vars.DOCKERHUB_USERNAME }}/systemd262
 
 jobs:
   build:
@@ -71,7 +71,7 @@ jobs:
           context: .
           platforms: ${{ matrix.platform }}
           cache-from: type=gha,scope=${{ env.PLATFORM_PAIR }}
-          outputs: type=image,name=${{ env.IMAGE }},push-by-digest=true,name-canonical=true,push=true
+          outputs: type=image,name=${{ env.HUB_IMAGE }},push-by-digest=true,name-canonical=true,push=true
 
       - name: Export digest
         if: steps.push.outcome == 'success'
@@ -110,7 +110,7 @@ jobs:
       - id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ${{ env.IMAGE }}
+          images: ${{ env.HUB_IMAGE }}
           tags: |
             type=raw,value=262,enable={{is_default_branch}}
             type=raw,value=latest,enable={{is_default_branch}}
@@ -123,7 +123,7 @@ jobs:
           # shellcheck disable=SC2046  # списки -t и дайджестов должны разбиться на аргументы
           docker buildx imagetools create \
             $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
-            $(printf '${{ env.IMAGE }}@sha256:%s ' *)
+            $(printf '${{ env.HUB_IMAGE }}@sha256:%s ' *)
 
       - name: Inspect
-        run: docker buildx imagetools inspect '${{ env.IMAGE }}:${{ steps.meta.outputs.version }}'
+        run: docker buildx imagetools inspect '${{ env.HUB_IMAGE }}:${{ steps.meta.outputs.version }}'
