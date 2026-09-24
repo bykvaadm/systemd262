@@ -64,7 +64,9 @@ NO_BUILD=1 ./scenarios/run.sh  # на уже собранном образе
 Нужны секреты репозитория:
 
 - `DOCKERHUB_USERNAME` — логин Docker Hub;
-- `DOCKERHUB_TOKEN` — access token Docker Hub с правом Read & Write.
+- `DOCKERHUB_TOKEN` — access token Docker Hub со scope Read, Write, Delete
+  (Delete нужен, чтобы обновлять Overview на Hub из этого README).
 
-Пока секретов нет, CI только собирает и тестирует. Теги: `262`, `latest`,
+Пока секретов нет, CI только собирает и тестирует.
+На push в `main` CI заодно обновляет Overview репозитория на Docker Hub. Теги: `262`, `latest`,
 `sha-<short>`, а на git-тегах `vX.Y.Z` — ещё и версия.

@@ -130,3 +130,15 @@ jobs:
 
       - name: Inspect
         run: docker buildx imagetools inspect '${{ env.HUB_IMAGE }}:${{ steps.meta.outputs.version }}'
+
+      # Overview на Docker Hub берётся из README.md. Токену для этого нужен
+      # scope Read, Write, Delete: с Read & Write Hub отвечает 403.
+      - name: Update Docker Hub overview
+        if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/systemd262
+          short-description: Fully static systemd 262 as PID 1 in Ubuntu 24.04 (amd64, arm64)
+          readme-filepath: ./README.md
